@@ -64,16 +64,21 @@ public class ProfileActivity extends AppCompatActivity {
                     usrEmail.setText("Email: "+user.getUser_email());
                     usrPhone.setText("Phone number: "+user.getUser_phone_number());
 
-//                    if (user.getProfileURL().equals("")){
-//                        profilePic.setImageResource(R.drawable.pofile_img);
-//                    }else{
-//                        Glide.with(ProfileActivity.this).load(user.getProfileURL()).into(profilePic);
-//                    }
-//                    if (user.getCoverURL().equals("")){
-//                        coverPic.setImageResource(R.drawable.pofile_img);
-//                    }else{
-//                        Glide.with(ProfileActivity.this).load(user.getCoverURL()).into(coverPic);
-//                    }
+//                    Log.i("TAG", "profile url--> "+ (user.getUser_profile_img()==null));
+                    if (user.getUser_profile_img().equals("") || user.getUser_profile_img()==null){
+//                    if (user.getUser_cover_img()==null){
+                        Log.i("TAG", "URL: "+user.getUser_profile_img());
+                        profilePic.setImageResource(R.drawable.pofile_img);
+                    }
+                    else{
+                        Log.i("TAG", "else--------------");
+                        Glide.with(ProfileActivity.this).load(user.getUser_profile_img()).into(profilePic);
+                    }
+                    if (user.getUser_cover_img().equals("")){
+                        coverPic.setImageResource(R.drawable.pofile_img);
+                    }else{
+                        Glide.with(ProfileActivity.this).load(user.getUser_cover_img()).into(coverPic);
+                    }
                 }
             }
 

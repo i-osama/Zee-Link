@@ -66,16 +66,20 @@ public class EditProfileActivity extends AppCompatActivity {
                         binding.editEmail.setText(user.getUser_email());
                         binding.editPhone.setText(user.getUser_phone_number());
 
-//                        if (user.getProfileURL().equals("")){
-//                            binding.profileImage.setImageResource(R.drawable.pofile_img);
-//                        }else{
-//                            Glide.with(EditProfileActivity.this).load(user.getProfileURL()).into(binding.profileImage);
-//                        }
-//                        if (user.getCoverURL().equals("")){
-//                            binding.proAcCoverImg.setImageResource(R.drawable.pofile_img);
-//                        }else{
-//                            Glide.with(EditProfileActivity.this).load(user.getCoverURL()).into(binding.proAcCoverImg);
-//                        }
+//                        ************** Setting up user images ***************
+                        if (user.getUser_profile_img().equals("") || user.getUser_profile_img()==null){
+                            binding.profileImage.setImageResource(R.drawable.pofile_img);
+                        }
+                        else{
+                            profileURL = user.getUser_profile_img();
+                            Glide.with(EditProfileActivity.this).load(user.getUser_profile_img()).into(binding.profileImage);
+                        }
+                        if (user.getUser_cover_img().equals("")){
+                            binding.proAcCoverImg.setImageResource(R.drawable.pofile_img);
+                        }else{
+                            coverURL = user.getUser_cover_img();
+                            Glide.with(EditProfileActivity.this).load(user.getUser_cover_img()).into(binding.proAcCoverImg);
+                        }
                     }
                 }
 
@@ -180,10 +184,6 @@ public class EditProfileActivity extends AppCompatActivity {
                         profileImgUri = data.getData();
                         binding.profileImage.setImageURI(profileImgUri);
                     }
-//                    if (isCoverImg){
-//                        coverImgUri = data.getData();
-//                        binding.proAcCoverImg.setImageURI(coverImgUri);
-//                    }
                 }
             }
         }
