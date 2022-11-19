@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<!--    app:showAsAction="always"-->
+    <item
+        android:title="Menu"
+        android:icon="@drawable/more_ver_icon"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/menuLogout"
+                android:title="Logout"
+                android:icon="@android:drawable/ic_lock_power_off"/>
+            <item
+                android:id="@+id/menuProfile"
+                android:title="Profile"
+                app:showAsAction="collapseActionView"
+                android:icon="@drawable/account_icon_2"/>
+            <item
+                android:id="@+id/menuAbout"
+                android:title="About"
+                android:icon="@drawable/warning_icon"/>
+
+        </menu>
+
+    </item>
+
+</menu>

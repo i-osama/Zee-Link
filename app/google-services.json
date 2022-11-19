@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "771484372008",
+    "project_id": "zee-link-f9f9b",
+    "storage_bucket": "zee-link-f9f9b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771484372008:android:6e92d9ca3e6741e618791d",
+        "android_client_info": {
+          "package_name": "com.zeeshan_s.zee_link"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771484372008-a1tjevoie9mkm1nrrk3vn2ghvs6ch3ug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOo1Ua0JOFuKkQvQt4FWP-Exy9jpDzJJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771484372008-a1tjevoie9mkm1nrrk3vn2ghvs6ch3ug.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
