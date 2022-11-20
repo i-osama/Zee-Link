@@ -213,8 +213,8 @@ public class EditProfileActivity extends AppCompatActivity {
             updateData.put("user_name", name);
             updateData.put("user_email", email);
             updateData.put("user_phone_number", phone);
+            updateData.put("user_id", currentUserId);
 
-            Log.i("TAG", "profile-- "+profileURL);
             if (profileURL != null){updateData.put("user_profile_img", profileURL);}
             else{
                 updateData.put("user_profile_img", "");

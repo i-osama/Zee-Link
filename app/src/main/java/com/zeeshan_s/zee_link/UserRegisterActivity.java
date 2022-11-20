@@ -84,6 +84,10 @@ public class UserRegisterActivity extends AppCompatActivity {
 //                ----------- Storing data to the firebase -------------
                 firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                 Map<String, Object> userMap = new HashMap<>();
+
+                userMap.put("user_id", firebaseUser.getUid());
+                userMap.put("user_profile_img", "");
+                userMap.put("user_cover_img", "");
                 userMap.put("user_name", name);
                 userMap.put("user_email", email);
                 userMap.put("user_phone_number", phone);
