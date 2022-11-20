@@ -1,4 +1,4 @@
-package com.zeeshan_s.zee_link;
+package com.zeeshan_s.zee_link.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.zeeshan_s.zee_link.Model.User;
+import com.zeeshan_s.zee_link.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -30,11 +32,13 @@ public class ProfileActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
     String currentUser;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
 
         coverPic = findViewById(R.id.proAcCoverImg);
         profilePic = findViewById(R.id.profile_image);
@@ -43,6 +47,12 @@ public class ProfileActivity extends AppCompatActivity {
         usrName = findViewById(R.id.proAcName);
         usrEmail = findViewById(R.id.proAcEmail);
         usrPhone = findViewById(R.id.proAcPhone);
+
+        intent = getIntent();
+
+        if (intent.getBooleanExtra("onlyShow",false)){
+                editOption.setVisibility(View.INVISIBLE);
+        }
 
 
 //        --------------- Getting data from firebase start --------------

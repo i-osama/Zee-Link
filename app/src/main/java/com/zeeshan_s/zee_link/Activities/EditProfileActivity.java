@@ -1,4 +1,4 @@
-package com.zeeshan_s.zee_link;
+package com.zeeshan_s.zee_link.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +24,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.zeeshan_s.zee_link.Model.User;
+import com.zeeshan_s.zee_link.R;
 import com.zeeshan_s.zee_link.databinding.ActivityEditProfileBinding;
 
 import java.util.HashMap;
@@ -54,7 +55,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
             databaseReference = FirebaseDatabase.getInstance().getReference("user").child(currentUserId);
             storageReferenceProfile = FirebaseStorage.getInstance().getReference("Profile").child(currentUserId);
-            storageReferenceCover = FirebaseStorage.getInstance().getReference("Cover");
+            storageReferenceCover = FirebaseStorage.getInstance().getReference("Cover").child(currentUserId);
 
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -105,7 +106,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if (task.isSuccessful()) {
 //                            Toast.makeText(EditProfileActivity.this, "Profile image changed", Toast.LENGTH_SHORT).show();
-                            Log.i("TAG", "---Succeed--- ");
+//                            Log.i("TAG", "---Succeed--- ");
                             storageReferenceProfile.child("user-profile").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {

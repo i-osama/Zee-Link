@@ -1,14 +1,14 @@
-package com.zeeshan_s.zee_link;
+package com.zeeshan_s.zee_link.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.net.MailTo;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.zeeshan_s.zee_link.R;
 
 public class FlashActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.zeeshan_s.zee_link;
+package com.zeeshan_s.zee_link.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.zeeshan_s.zee_link.databinding.ActivityUserRegisterBinding;
+import com.zeeshan_s.zee_link.R;
 import com.zeeshan_s.zee_link.databinding.ActivityUserRegisterBinding;
 
 import java.util.HashMap;
