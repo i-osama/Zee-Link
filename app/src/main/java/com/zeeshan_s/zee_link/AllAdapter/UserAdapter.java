@@ -2,6 +2,7 @@ package com.zeeshan_s.zee_link.AllAdapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.zeeshan_s.zee_link.Activities.ChatActivity;
 import com.zeeshan_s.zee_link.Activities.ProfileActivity;
 import com.zeeshan_s.zee_link.AllViewHolder.UserViewHolder;
 import com.zeeshan_s.zee_link.Model.User;
@@ -45,13 +47,20 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
             Glide.with(context).load(user.getUser_profile_img()).into(holder.profileImg);
         }
 
+        String userID = user.getUser_id();
+
         holder.msgImg.setOnClickListener(view -> {
+            Log.i("TAG", "Inside of the adapter msgImg function");
+            Intent intent = new Intent(context, ChatActivity.class);
+            intent.putExtra("userID", userID);
+            context.startActivity(intent);
 
         });
 
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, ProfileActivity.class);
             intent.putExtra("onlyShow", true);
+            intent.putExtra("userID", userID);
             context.startActivity(intent);
         });
 

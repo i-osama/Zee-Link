@@ -50,18 +50,22 @@ public class ProfileActivity extends AppCompatActivity {
 
         intent = getIntent();
 
+//        --------------- Getting data from firebase start --------------
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (intent.getBooleanExtra("onlyShow",false)){
                 editOption.setVisibility(View.INVISIBLE);
+                currentUser = intent.getStringExtra("userID");
+            Log.i("TAG", "User from adapter: "+ currentUser);
+        }else{
+            currentUser = firebaseUser.getUid();
         }
 
 
-//        --------------- Getting data from firebase start --------------
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null){
-            currentUser = firebaseUser.getUid();
+
             databaseReference = FirebaseDatabase.getInstance().getReference("user").child(currentUser);
 
-            Log.i("TAG", "User Id: "+ currentUser);
+//            Log.i("TAG", "User Id: "+ currentUser);
         }
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -77,11 +81,11 @@ public class ProfileActivity extends AppCompatActivity {
 //                    Log.i("TAG", "profile url--> "+ (user.getUser_profile_img()==null));
                     if (user.getUser_profile_img().equals("") || user.getUser_profile_img()==null){
 //                    if (user.getUser_cover_img()==null){
-                        Log.i("TAG", "URL: "+user.getUser_profile_img());
+//                        Log.i("TAG", "URL: "+user.getUser_profile_img());
                         profilePic.setImageResource(R.drawable.pofile_img);
                     }
                     else{
-                        Log.i("TAG", "else--------------");
+//                        Log.i("TAG", "else--------------");
                         Glide.with(ProfileActivity.this).load(user.getUser_profile_img()).into(profilePic);
                     }
                     if (user.getUser_cover_img().equals("")){
