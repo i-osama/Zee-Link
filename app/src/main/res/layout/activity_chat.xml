@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.ChatActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="#049F90">
+
+        <ImageView
+            android:id="@+id/chatBackImg"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="8dp"
+
+            android:src="@drawable/back_icon"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/chatProfileImg"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/chatBackImg"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/pofile_img"/>
+
+        <TextView
+            android:id="@+id/chatProfileName"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/berkshire_swash"
+            android:maxLines="1"
+            android:text="Profile name"
+            android:textColor="@color/th_white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+
+            app:layout_constraintStart_toEndOf="@id/chatProfileImg"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/chatProfileEmail"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user@mail.my"
+            android:textStyle="italic"
+            android:textColor="@color/th_white"
+            android:fontFamily="@font/allerta"
+            android:textSize="17sp"
+            android:maxLines="1"
+            android:layout_marginStart="10dp"
+           android:layout_marginEnd="10dp"
+
+            app:layout_constraintStart_toEndOf="@id/chatProfileImg"
+            app:layout_constraintTop_toBottomOf="@id/chatProfileName"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="#ECEFEF">
+
+
+        <EditText
+            android:id="@+id/chatMsgBox"
+            style="@style/ShapeAppearance.Material3.Corner.Large"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/chatMsgSent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/text_box_back"
+            android:backgroundTint="#BBC1C0"
+            android:hint="$Message"
+
+            android:inputType="text"
+            android:paddingStart="15dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="10dp"
+            android:singleLine="true"
+            android:textColorHint="@color/th_black"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/chatMsgSent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+
+            android:src="@drawable/send_icon"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
