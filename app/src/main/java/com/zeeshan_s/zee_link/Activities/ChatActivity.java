@@ -1,11 +1,20 @@
 package com.zeeshan_s.zee_link.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.zeeshan_s.zee_link.Model.User;
 import com.zeeshan_s.zee_link.R;
 import com.zeeshan_s.zee_link.databinding.ActivityChatBinding;
 
@@ -14,6 +23,7 @@ public class ChatActivity extends AppCompatActivity {
     ActivityChatBinding binding;
     Intent intent;
     String userId;
+    DatabaseReference userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +33,36 @@ public class ChatActivity extends AppCompatActivity {
 
         intent = getIntent();
         userId= intent.getStringExtra("userID");
-        Log.i("TAG", "User--> "+ userId);
 
+        userRef = FirebaseDatabase.getInstance().getReference("user").child(userId);
 
+        binding.chatProgressBar.setVisibility(View.VISIBLE);    // Setting progressBar
+
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+
+                binding.chatProfileName.setText(user.getUser_name());
+                binding.chatProfileEmail.setText(user.getUser_email());
+
+                if (user.getUser_profile_img().equals("")){
+                    binding.chatProfileImg.setImageResource(R.drawable.pofile_img);
+                }else {
+                    Glide.with(ChatActivity.this).load(user.getUser_profile_img()).into(binding.chatProfileImg);
+                }
+                binding.chatProgressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        binding.chatBackImg.setOnClickListener(view -> {
+            finish();
+        });
 
     }
 }

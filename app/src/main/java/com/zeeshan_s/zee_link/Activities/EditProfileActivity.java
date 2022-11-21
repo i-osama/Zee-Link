@@ -231,6 +231,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     if (task.isSuccessful()){
                         Toast.makeText(EditProfileActivity.this, "Data updated", Toast.LENGTH_SHORT).show();
                         finish();
+//                        finish();
                     }else {
                         Toast.makeText(EditProfileActivity.this, "Error! couldn't update data", Toast.LENGTH_SHORT).show();
                     }

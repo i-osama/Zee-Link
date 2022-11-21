@@ -5,6 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.ChatActivity">
+
+    <ProgressBar
+        android:id="@+id/chatProgressBar"
+        android:visibility="gone"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -100,14 +112,12 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/text_box_back"
             android:backgroundTint="#BBC1C0"
-            android:hint="$Message"
+            android:hint="Message"
 
-            android:inputType="text"
             android:paddingStart="15dp"
             android:paddingTop="10dp"
             android:paddingEnd="10dp"
             android:paddingBottom="10dp"
-            android:singleLine="true"
             android:textColorHint="@color/th_black"
             android:textSize="22sp" />
 
@@ -115,12 +125,12 @@
             android:id="@+id/chatMsgSent"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:layout_constraintTop_toTopOf="parent"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
 
             android:layout_marginTop="12dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginEnd="8dp"
 
             android:src="@drawable/send_icon"/>

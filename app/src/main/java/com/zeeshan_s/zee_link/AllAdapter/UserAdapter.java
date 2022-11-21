@@ -50,7 +50,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
         String userID = user.getUser_id();
 
         holder.msgImg.setOnClickListener(view -> {
-            Log.i("TAG", "Inside of the adapter msgImg function");
             Intent intent = new Intent(context, ChatActivity.class);
             intent.putExtra("userID", userID);
             context.startActivity(intent);

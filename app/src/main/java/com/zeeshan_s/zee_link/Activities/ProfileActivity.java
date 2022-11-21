@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -28,6 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView coverPic, editOption;
     CircleImageView profilePic;
     TextView usrName, usrEmail, usrPhone;
+    ProgressBar progressBar;
 
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
@@ -47,10 +49,13 @@ public class ProfileActivity extends AppCompatActivity {
         usrName = findViewById(R.id.proAcName);
         usrEmail = findViewById(R.id.proAcEmail);
         usrPhone = findViewById(R.id.proAcPhone);
+        progressBar = findViewById(R.id.proAcProgressBar);
 
         intent = getIntent();
 
 //        --------------- Getting data from firebase start --------------
+        progressBar.setVisibility(View.VISIBLE); //-----Setting progressbar
+
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (intent.getBooleanExtra("onlyShow",false)){
                 editOption.setVisibility(View.INVISIBLE);
@@ -62,10 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         if (firebaseUser != null){
-
             databaseReference = FirebaseDatabase.getInstance().getReference("user").child(currentUser);
-
-//            Log.i("TAG", "User Id: "+ currentUser);
         }
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -78,14 +80,10 @@ public class ProfileActivity extends AppCompatActivity {
                     usrEmail.setText("Email: "+user.getUser_email());
                     usrPhone.setText("Phone number: "+user.getUser_phone_number());
 
-//                    Log.i("TAG", "profile url--> "+ (user.getUser_profile_img()==null));
                     if (user.getUser_profile_img().equals("") || user.getUser_profile_img()==null){
-//                    if (user.getUser_cover_img()==null){
-//                        Log.i("TAG", "URL: "+user.getUser_profile_img());
                         profilePic.setImageResource(R.drawable.pofile_img);
                     }
                     else{
-//                        Log.i("TAG", "else--------------");
                         Glide.with(ProfileActivity.this).load(user.getUser_profile_img()).into(profilePic);
                     }
                     if (user.getUser_cover_img().equals("")){
@@ -93,6 +91,7 @@ public class ProfileActivity extends AppCompatActivity {
                     }else{
                         Glide.with(ProfileActivity.this).load(user.getUser_cover_img()).into(coverPic);
                     }
+                    progressBar.setVisibility(View.GONE);
                 }
             }
 

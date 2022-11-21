@@ -17,7 +17,7 @@
         android:theme="@style/Theme.ZeeLink"
         tools:targetApi="31">
         <activity
-            android:name=".ChatActivity"
+            android:name=".Activities.ChatActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
