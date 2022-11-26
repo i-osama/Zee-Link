@@ -73,13 +73,15 @@ public class EditProfileActivity extends AppCompatActivity {
                         }
                         else{
                             profileURL = user.getUser_profile_img();
-                            Glide.with(EditProfileActivity.this).load(user.getUser_profile_img()).into(binding.profileImage);
+//                            Glide.with(EditProfileActivity.this).load(profileURL).into(binding.profileImage);
+                            Glide.with(getApplicationContext()).load(profileURL).into(binding.profileImage);
                         }
                         if (user.getUser_cover_img().equals("")){
                             binding.proAcCoverImg.setImageResource(R.drawable.pofile_img);
                         }else{
                             coverURL = user.getUser_cover_img();
-                            Glide.with(EditProfileActivity.this).load(user.getUser_cover_img()).into(binding.proAcCoverImg);
+//                            Glide.with(EditProfileActivity.this).load(coverURL).into(binding.proAcCoverImg);
+                            Glide.with(getApplicationContext()).load(coverURL).into(binding.proAcCoverImg);
                         }
                     }
                 }
