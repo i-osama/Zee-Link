@@ -99,10 +99,10 @@ public class UserRegisterActivity extends AppCompatActivity {
 
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Log.i("TAG", "onComplete: "+task.getResult().toString());
+//                        Log.i("TAG", "onComplete: "+task.getResult().toString());
                         if (task.isSuccessful()){
 
-                            Log.i("TAG", "onSuccess: 2--------");
+//                            Log.i("TAG", "onSuccess: 2--------");
                             Toast.makeText(UserRegisterActivity.this, "Data added successfully!!", Toast.LENGTH_SHORT).show();
                             binding.regiAcRegisterBtn.setVisibility(View.VISIBLE);
                             binding.regiAcProgressBar.setVisibility(View.GONE);

@@ -51,6 +51,7 @@ public class EditProfileActivity extends AppCompatActivity {
         currentUserId= intent.getStringExtra("userId");
 
 
+//        Showing user details
         if (currentUserId != null){
 
             databaseReference = FirebaseDatabase.getInstance().getReference("user").child(currentUserId);
