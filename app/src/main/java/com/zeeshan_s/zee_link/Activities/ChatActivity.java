@@ -23,6 +23,9 @@ import com.zeeshan_s.zee_link.Model.User;
 import com.zeeshan_s.zee_link.R;
 import com.zeeshan_s.zee_link.databinding.ActivityChatBinding;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChatActivity extends AppCompatActivity {
 
     ActivityChatBinding binding;
@@ -30,6 +33,7 @@ public class ChatActivity extends AppCompatActivity {
     String myUserId, otherUserId;
     DatabaseReference databaseReference;
     FirebaseUser firebaseUser;
+    List<ChatModel> chatModelList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,7 @@ public class ChatActivity extends AppCompatActivity {
 
         intent = getIntent();
         otherUserId= intent.getStringExtra("userID");
+        chatModelList = new ArrayList<>();
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         myUserId = firebaseUser.getUid();
@@ -63,6 +68,33 @@ public class ChatActivity extends AppCompatActivity {
                     Glide.with(ChatActivity.this).load(user.getUser_profile_img()).into(binding.chatProfileImg);
                 }
                 binding.chatProgressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+//        ---------------- Receiving Messages from firebase storage --------------
+
+        databaseReference.child("chat").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                chatModelList.clear();
+
+                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+
+                    ChatModel chatModel = dataSnapshot.getValue(ChatModel.class);
+
+                    if (chatModel.getSenderID().equals(myUserId) && chatModel.getReceiverID().equals(otherUserId) ||
+                        chatModel.getReceiverID().equals(myUserId) && chatModel.getSenderID().equals(otherUserId)){
+
+                        chatModelList.add(chatModel);
+                    }
+                }
+
+//                ------TODO: setChatToAdapter();
             }
 
             @Override
