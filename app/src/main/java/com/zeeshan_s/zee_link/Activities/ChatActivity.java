@@ -5,15 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.zeeshan_s.zee_link.Model.ChatModel;
 import com.zeeshan_s.zee_link.Model.User;
 import com.zeeshan_s.zee_link.R;
 import com.zeeshan_s.zee_link.databinding.ActivityChatBinding;
@@ -22,8 +27,9 @@ public class ChatActivity extends AppCompatActivity {
 
     ActivityChatBinding binding;
     Intent intent;
-    String userId;
-    DatabaseReference userRef;
+    String myUserId, otherUserId;
+    DatabaseReference databaseReference;
+    FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +38,20 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         intent = getIntent();
-        userId= intent.getStringExtra("userID");
+        otherUserId= intent.getStringExtra("userID");
 
-        userRef = FirebaseDatabase.getInstance().getReference("user").child(userId);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        myUserId = firebaseUser.getUid();
 
-        binding.chatProgressBar.setVisibility(View.VISIBLE);    // Setting progressBar
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        userRef.addValueEventListener(new ValueEventListener() {
+//        ------------------------ Setting data to the View -----------------------
+        databaseReference.child("user").child(otherUserId).addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                binding.chatProgressBar.setVisibility(View.VISIBLE);    // Setting progressBar
+
                 User user = snapshot.getValue(User.class);
 
                 binding.chatProfileName.setText(user.getUser_name());
@@ -60,6 +71,31 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+//        ----------- Sending Message -----------
+        binding.chatMsgSendBtn.setOnClickListener(view -> {
+            String message = binding.chatMsgBox.getText().toString().trim();
+
+            long currentMillis = System.currentTimeMillis();
+            String chatKey = databaseReference.push().getKey();
+
+//            --------------- Passing Data to the firebase -----------------
+            ChatModel chatModel = new ChatModel(myUserId, otherUserId, message,chatKey, currentMillis);
+
+            databaseReference.child("chat").child(chatKey).setValue(chatModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                    if (task.isSuccessful()){
+                        binding.chatMsgBox.setText("");
+                    }else {
+                        Toast.makeText(ChatActivity.this, "Error in sending message", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        });
+
+//        ------------- Back btn -------------
         binding.chatBackImg.setOnClickListener(view -> {
             finish();
         });

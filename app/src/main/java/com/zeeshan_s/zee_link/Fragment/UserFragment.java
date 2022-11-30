@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +31,9 @@ public class UserFragment extends Fragment {
 
     ArrayList<User> userList;
     DatabaseReference userDatabaseRef;
+    FirebaseUser firebaseUser;
     FragmentUserBinding binding;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,6 +42,7 @@ public class UserFragment extends Fragment {
 
         userList = new ArrayList<>();
         userDatabaseRef = FirebaseDatabase.getInstance().getReference("user");
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         userDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -45,7 +50,10 @@ public class UserFragment extends Fragment {
                 userList.clear();
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                     User user = dataSnapshot.getValue(User.class);
-                    userList.add(user);
+
+                    if (!user.getUser_id().equals(firebaseUser.getUid())) {
+                        userList.add(user);
+                    }
                 }
 //                ----------------------- Recycler Adapter --------------
                 UserAdapter adapter = new UserAdapter(userList, requireActivity());
