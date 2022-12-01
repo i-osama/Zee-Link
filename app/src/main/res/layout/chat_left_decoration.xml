@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/chat_bubble_left"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginEnd="55dp"
+    android:layout_marginStart="4dp"
+
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:paddingTop="4dp"
+    android:paddingBOttom="4dp"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/conversation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="Your Message"
+        android:textColor="@color/white"
+        android:textSize="@dimen/chatTextSize"
+        android:textStyle="bold"
+
+        android:includeFontPadding="false"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/conversationTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFF4F4"
+        android:fontFamily="@font/poppins"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:text="Chat Time"
+        android:paddingHorizontal="6dp"
+        android:paddingBottom="3dp"
+        android:includeFontPadding="false"
+
+        app:layout_constraintTop_toBottomOf="@id/conversation"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
