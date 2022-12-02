@@ -13,4 +13,6 @@
     <color name="th_black">#0B0A0A</color>
     <color name="th_tealTrans">#860CBFAE</color>
     <color name="th_grayTrans">#7C676868</color>
+
+    <color name="chatBackColor">#fff</color>
 </resources>

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.zeeshan_s.zee_link.AllAdapter.ChatAdapter;
 import com.zeeshan_s.zee_link.Model.ChatModel;
 import com.zeeshan_s.zee_link.Model.User;
 import com.zeeshan_s.zee_link.R;
@@ -76,7 +78,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-//        ---------------- Receiving Messages from firebase storage --------------
+        //        ---------------- Receiving Messages from firebase storage --------------
 
         databaseReference.child("chat").addValueEventListener(new ValueEventListener() {
             @Override
@@ -88,13 +90,14 @@ public class ChatActivity extends AppCompatActivity {
                     ChatModel chatModel = dataSnapshot.getValue(ChatModel.class);
 
                     if (chatModel.getSenderID().equals(myUserId) && chatModel.getReceiverID().equals(otherUserId) ||
-                        chatModel.getReceiverID().equals(myUserId) && chatModel.getSenderID().equals(otherUserId)){
+                            chatModel.getReceiverID().equals(myUserId) && chatModel.getSenderID().equals(otherUserId)){
 
                         chatModelList.add(chatModel);
                     }
                 }
 
-//                ------TODO: setChatToAdapter();
+                Log.i("TAG", "Before the Recycler option!----");
+                setChatToAdapter(chatModelList);
             }
 
             @Override
@@ -102,6 +105,7 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+
 
 //        ----------- Sending Message -----------
         binding.chatMsgSendBtn.setOnClickListener(view -> {
@@ -127,10 +131,19 @@ public class ChatActivity extends AppCompatActivity {
 
         });
 
+
 //        ------------- Back btn -------------
         binding.chatBackImg.setOnClickListener(view -> {
             finish();
         });
+
+    }
+
+    private void setChatToAdapter(List<ChatModel> modelList) {
+        Log.i("TAG", "Inside the Recycler UI setting function");
+        Log.i("TAG", "Model:"+ modelList.get(0).getTimeMillis());
+        ChatAdapter adapter = new ChatAdapter(ChatActivity.this, modelList, myUserId);
+        binding.chatRecycler.setAdapter(adapter);
 
     }
 }

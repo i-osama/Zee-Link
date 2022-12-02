@@ -2,4 +2,7 @@
 <resources>
     <color name="th_white">#0B0A0A</color>
     <color name="th_black">#FAFAFA</color>
+
+    <color name="th_grayTrans">#7C232525</color>
+    <color name="chatBackColor">#9F9595</color>
 </resources>
